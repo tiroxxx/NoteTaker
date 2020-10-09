@@ -2,7 +2,8 @@ const fs = require("fs");
 
 // class for your notes
 class Store {
-    constructor(notes){
+    constructor(title, notes){
+        this.title = title;
         this.notes = notes;
     }
 
@@ -13,7 +14,9 @@ class Store {
     }
 
     writeNote(){
-
+        return fs.writeFile(__dirname + "/db.json", this.notes, function(err){
+            if(err) throw err;
+        })
     }
 
     deleteNote(){
@@ -21,5 +24,5 @@ class Store {
     }
 }
 
-module.exports()
+module.exports = Store;
 // defined fuctions that read, write, and delete
