@@ -16,8 +16,11 @@ module.exports = function (app) {
         newNote.id = notes[notes.length - 1].id + 1;
         console.log(newNote.id);
         // adding the new note to my storage
-        
-
+        notes.push(newNote);
+        // adding new note to the json file
+        fs.writeFile("../db/db_json", notes);
+        // adding new note to the client
+        res.json(newNote);
     });
 
     // delete
