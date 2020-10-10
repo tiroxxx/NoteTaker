@@ -36,15 +36,18 @@ module.exports = function (app) {
     // delete
     app.delete("/api/notes/:id", function (req, res) {
         console.log(req.params.id);
+        console.log(notes);
         // retrieve id of the note to be deleted
         const id = parseInt(req.params.id);
         // when we find the note with desired id, delete it from notes array
-        for (let i; i < notes.length; i++) {
-            if (id == notes[i].id) {
-                notes.splice(i, 1);
-                console.log(notes);
+        notes = notes.filter(function(note){
+            if (id == note.id){
+                return false;
             }
-        }
+            else {
+                return true;
+            }
+        });
         // write newly edited notes array to the json file
         fs.writeFile("./db/db.json", JSON.stringify(notes), function (err) {
             if (err) throw err
