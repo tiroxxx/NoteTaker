@@ -1,4 +1,4 @@
 // note storage
 let notes = [{}];
 
-module.exports = noteContents;
+module.exports = notes;
