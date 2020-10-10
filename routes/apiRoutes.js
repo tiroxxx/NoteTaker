@@ -35,8 +35,10 @@ module.exports = function (app) {
 
     // delete
     app.delete("/api/notes/:id", function (req, res) {
-        console.log(req.params.id);
-        console.log(notes);
+        fs.readFile("./db/db.json", "utf8", function(err, data){
+            if (err) throw err;
+            notes = JSON.parse(data);
+        });
         // retrieve id of the note to be deleted
         const id = parseInt(req.params.id);
         // when we find the note with desired id, delete it from notes array
